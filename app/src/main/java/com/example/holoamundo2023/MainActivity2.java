@@ -27,6 +27,7 @@ public class MainActivity2 extends AppCompatActivity implements Asynchtask {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+
         TextView txtSaludo = (TextView) findViewById(R.id.textView);
         Bundle bundle = this.getIntent().getExtras();
         txtSaludo.setText("Hola, Bienvenido \n " + "Nombre: " + bundle.getString("NOMBRE") + "\n" +
@@ -39,34 +40,35 @@ public class MainActivity2 extends AppCompatActivity implements Asynchtask {
         WebService ws = new WebService("http://api.androidhive.info/contacts/", datos,
                 MainActivity2.this, MainActivity2.this);
         ws.execute("GET");*/
-    }
-    RequestQueue queue = Volley.newRequestQueue(this);
-    String url ="http://revistas.uteq.edu.ec/ws/login.php?usr="
-    //bundle.getString("NOMBRE") + "&pass=" + bundle.getString("PASSWORD");
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    Toast.makeText(MainActivity2.this, "Resp: " + response,
-                            Toast.LENGTH_SHORT).show();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://revistas.uteq.edu.ec/ws/login.php?usr="
+        //bundle.getString("NOMBRE") + "&pass=" + bundle.getString("PASSWORD");
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(MainActivity2.this, "Resp: " + response,
+                                Toast.LENGTH_SHORT).show();
 
-                }
-            },
-            new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(MainActivity2.this, "Error: " + error.getMessage(),
-                            Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity2.this, "Error: " + error.getMessage(),
+                                Toast.LENGTH_SHORT).show();
 
-                }
-            });
-            queue.add(stringRequest);
+                    }
+                });
+                queue.add(stringRequest);
+
+
+
+
+        }
+
     @Override
-    public void processFinish(String result) throws JSONException {
-        Toast.makeText(this, "Resp: " + result, Toast.LENGTH_SHORT).show();
-
-
-
+    public void processFinish(String result) throws JSONException { Toast.makeText(this, "Resp: " + result, Toast.LENGTH_SHORT).show();
 
     }
 }
